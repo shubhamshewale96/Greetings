@@ -5,6 +5,8 @@ import com.h2database.Model.Greeting;
 
 import com.h2database.Model.User;
 
+import com.h2database.repository.GreetingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -18,10 +20,8 @@ public class GreetingService implements IGreetingService{
 
             return new Greeting(counter.incrementAndGet(), String.format(template));
         }
-
-
-
-
+    @Autowired
+    GreetingRepository greetingRepository;
     @Override
     public Greeting addGreeting(User user) {
         String template = "Hello, %s!";
@@ -30,7 +30,7 @@ public class GreetingService implements IGreetingService{
         String message = String.format(template, (user.toString().isEmpty())? "World" :
                 user.getFirstName().isEmpty()? user.getLastName() : user.getLastName().isEmpty()? user.getFirstName() :
                         user.getFirstName() + " " + user.getLastName());
-        return  (new Greeting(counter.incrementAndGet(), message));
+        return greetingRepository.save(new Greeting(counter.incrementAndGet(), message));
 
     }
 
