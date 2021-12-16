@@ -1,4 +1,4 @@
-package com.h2database;
+package com.h2database.Model;
 
 public class Greeting {
 
