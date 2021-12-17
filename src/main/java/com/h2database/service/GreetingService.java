@@ -6,6 +6,7 @@ import com.h2database.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -35,7 +36,12 @@ public class GreetingService implements IGreetingService{
     @Override
     public Optional<Greeting> getGreetingById(Long id) {
       return greetingRepository.findById(id);
-
-
     }
+
+    @Override
+    public List<Greeting> getAllGreeting() {
+        return greetingRepository.findAll();
+    }
+
+
 }

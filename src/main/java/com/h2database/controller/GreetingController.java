@@ -9,6 +9,7 @@ import com.h2database.service.IGreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,5 +44,9 @@ public class GreetingController {
     public Optional<Greeting> findById(@PathVariable Long id){
 
         return greetingService.getGreetingById(id);
+    }
+    @GetMapping(value = "/getAllGreeting")
+    public List<Greeting> getGreetingAllById() {
+        return greetingService.getAllGreeting();
     }
 }
