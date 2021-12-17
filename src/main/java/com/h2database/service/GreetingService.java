@@ -1,14 +1,12 @@
 package com.h2database.service;
 
 import com.h2database.Model.Greeting;
-
-
 import com.h2database.Model.User;
-
 import com.h2database.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -34,5 +32,10 @@ public class GreetingService implements IGreetingService{
 
     }
 
+    @Override
+    public Optional<Greeting> getGreetingById(Long id) {
+      return greetingRepository.findById(id);
 
+
+    }
 }

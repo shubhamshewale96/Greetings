@@ -9,7 +9,7 @@ import com.h2database.service.IGreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
 
 @RestController
 public class GreetingController {
@@ -32,13 +32,16 @@ public class GreetingController {
 
     }
 
-    @GetMapping(value={"", "/", "/greeting"})
+    @RequestMapping (method = RequestMethod.POST ,value={"", "/", "/greeting"})
     public Greeting greeting(@RequestParam(value = "firstName", defaultValue = "World") String firstName,
                              @RequestParam(value = "lastName", defaultValue = "") String lastName) {
-        User user = new User();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
+        User user = new User(firstName, lastName);
+
         return greetingService.addGreeting(user);
     }
+    @GetMapping("/greeting/{id}")
+    public Optional<Greeting> findById(@PathVariable Long id){
 
+        return greetingService.getGreetingById(id);
+    }
 }
