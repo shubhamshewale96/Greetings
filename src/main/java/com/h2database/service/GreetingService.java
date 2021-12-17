@@ -42,6 +42,12 @@ public class GreetingService implements IGreetingService{
     public List<Greeting> getAllGreeting() {
         return greetingRepository.findAll();
     }
+    public void updateGreetingById(Greeting greeting, long id) {
+        Optional<Greeting> findById = greetingRepository.findById(id);
+        if (findById.isPresent()) {
+            greetingRepository.save(greeting);
+        }
+    }
 
 
 }
